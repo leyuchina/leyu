@@ -25,7 +25,7 @@ node* create(char *question){
 	node *n = malloc(sizeof(node));
 	n->question = strdup(question);
 	n->no = NULL;
-	n->yes =NULL;
+	n->yes=NULL;
 	return n;
 }
 
