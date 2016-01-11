@@ -1,0 +1,28 @@
+
+#首先我们定义我们的命令变量
+CC	=	gcc
+AR	=	ar
+RM	=	rm
+CP	=	cp
+
+#定义我们需要的各种局部变量
+OBJS	= main .
+TARGET	= myapp
+
+#利用我们准备好的各种变量定义规则
+all:$(TARGET)
+$(TARGET):$(OBJS) $(LIBS)
+	$(CC) $(LKFLAGS) $(OBJS) $(LIBS) -o $@
+	mylib/libmylib.a::
+	$(MAKE) -C mylib
+	%.o:%.c
+	$(CC) -c $(CFLAGS) $< -o $@
+
+#安装程序到指定的目录
+#install:
+#$(CP) $(TARGET) $(INSTALLDIR)
+#不要忘记清除中间文件，目标文件，子目录文件哦
+clean:$(SUBDIR_CLEAN)
+		-$(RM) *.o $(TARGET)
+$(SUBDIR_CLEAN):$(RM) -C mylib clean
+
